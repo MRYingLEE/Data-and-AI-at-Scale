@@ -1,7 +1,7 @@
 # Data-and-AI-at-Scale
 Some experience, thoughts, code snippets related to data and AI at scale 
 
-# Principles: To avoid scalability by Archtecting
+# Principles: To avoid scalability issues by Archtecting
 
 ## Infrastructure
 ### Severless First
