@@ -71,10 +71,11 @@ This operator is very important but not well-known. It allows a workflow to skip
 ### Output Data Quality Check. The generated batch output could be of low quality. Without a data quality check, dirty data could be published.
 ### Latest only data release. Most likely, data pipelines are not for one-off. So how deal with different batches of data is very critical. In most situations, only the latest data is really needed for publishing. Please note, in some situations, the different batches of data should be union-ed together instead of replaced by the latest version.
 ### Keep the history. Usually, the generated batch data should be kept. In most situations, a batch of data can be treated as a partition of a table. But for some schema change situations, it is not good to use partitions. A general way is to use tables with a wildcard, such as table_YYYYMMDD. 
+
 ## Schedule
-	After we discussed a general data pipeline process, then let us focus on schedule, which is critical to non-one-off pipelines.
-	At first, we may use a new feature of Airflow, timetable, to deal with some irregular schedules. For example, some data is only available for stock market trading days.
-	Then, most likely we need to assign a time part. For example, when data is supposed to come between 8 pm and 10 pm, which time should be used to schedule the data pipeline? Because we use deferrable sensors to check the existence of data, so we can use 8 pm instead of 10 pm. So that data will be processed as soon as possible with a little checking overhead.
+After we discussed a general data pipeline process, then let us focus on schedule, which is critical to non-one-off pipelines.
+At first, we may use a new feature of Airflow, timetable, to deal with some irregular schedules. For example, some data is only available for stock market trading days.
+Then, most likely we need to assign a time part. For example, when data is supposed to come between 8 pm and 10 pm, which time should be used to schedule the data pipeline? Because we use deferrable sensors to check the existence of data, so we can use 8 pm instead of 10 pm. So that data will be processed as soon as possible with a little checking overhead.
 
 In conclusion, ETL/ELT data pipelines are not only ETL/ELT but also data pipelines. A good design could mitigate risks and make the data pipeline more robust. Thereafter the following data operation will be easy.
 
