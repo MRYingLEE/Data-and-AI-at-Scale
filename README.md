@@ -18,33 +18,6 @@ Cloud service reduce the difficulty of scalability.
 ### Native First
 
 
-# Situations: To provide scalability by Creativity 
-
-## Situation 1: Different data vendors have different data license requirements. How to link them together and following these requirements?
-
-## Situation 2: Vendors provide data at a daily frequence, how to keep the history but also to keep the management cost low?
-Table with Partition or Wildcard tables?
-
-## Situation 3: Vendors provide all kinds of data. Should we use ETL or ELT? Or EtLT (try to transform after loading as much as possible)
-In some situations (parquet files with unsual column names), we even use ELT at first, then ETL when the former fails.
-
-## Situation 4: A vendor called R provides data as many time series of data, how to pivot it and unpivot it?
-
-## Situation 5: A vendor called B provides 200+ files as a batch. How to link them together?
-
-## Situation 6: A company has thousands of staff, how to create contextual views for each one at run time?
-
-## Situation 7: Thousands of data columns have been ingested as string, how to decide a most suitable column type?
-
-## Situation 8: A vendor called C provides an unbound pivot, which exceeds the BigQuery's column number limit (10k).
-
-## Situation 9: A BigQuery loading function ignores hundred of rows of CSV for some special characters within them while Park can recognize it in a partial correct way.
-
-## Situation 10: How to operate data pipelines automatically and manually?
-
-## Situation 11: How to make sure data pipeline runs when the whole batch of files are ready?
-
-
 # Experience and Thoughts on Data Pipeline Development in Airflow
 
 I have led a team to build 20+ ETL/ELT data pipelines in Airflow. As a practitioner, I am to share my experience and thoughts.
@@ -83,9 +56,9 @@ Most likely, data pipelines are not for one-off. So how deal with different batc
 #### Keep the history. Usually, the generated batch data should be kept. In most situations, a batch of data can be treated as a partition of a table. But for some schema change situations, it is not good to use partitions. A general way is to use tables with a wildcard, such as table_YYYYMMDD. 
 
 ### Schedule
-	After we discussed a general data pipeline process, then let us focus on schedule, which is critical to non-one-off pipelines.
-	At first, we may use a new feature of Airflow, timetable, to deal with some irregular schedules. For example, some data is only available for stock market trading days.
-	Then, most likely we need to assign a time part. For example, when data is supposed to come between 8 pm and 10 pm, which time should be used to schedule the data pipeline? Because we use deferrable sensors to check the existence of data, so we can use 8 pm instead of 10 pm. So that data will be processed as soon as possible with a little checking overhead.
+After we discussed a general data pipeline process, then let us focus on schedule, which is critical to non-one-off pipelines.
+At first, we may use a new feature of Airflow, timetable, to deal with some irregular schedules. For example, some data is only available for stock market trading days.
+Then, most likely we need to assign a time part. For example, when data is supposed to come between 8 pm and 10 pm, which time should be used to schedule the data pipeline? Because we use deferrable sensors to check the existence of data, so we can use 8 pm instead of 10 pm. So that data will be processed as soon as possible with a little checking overhead.
 
 In conclusion, ETL/ELT data pipelines are not only ETL/ELT but also data pipelines. A good design could mitigate risks and make the data pipeline more robust. Thereafter the following data operation will be easy.
 
@@ -141,3 +114,28 @@ In a conclusion, teamwork is very important to data pipeline development, we nee
 
 As a partitioner, I wish my experience and thoughts can bring you some real hints on solving practical issues in data pipeline development in Airflow.
 
+# Situations: To provide scalability by Creativity 
+
+## Situation 1: Different data vendors have different data license requirements. How to link them together and following these requirements?
+
+## Situation 2: Vendors provide data at a daily frequence, how to keep the history but also to keep the management cost low?
+Table with Partition or Wildcard tables?
+
+## Situation 3: Vendors provide all kinds of data. Should we use ETL or ELT? Or EtLT (try to transform after loading as much as possible)
+In some situations (parquet files with unsual column names), we even use ELT at first, then ETL when the former fails.
+
+## Situation 4: A vendor called R provides data as many time series of data, how to pivot it and unpivot it?
+
+## Situation 5: A vendor called B provides 200+ files as a batch. How to link them together?
+
+## Situation 6: A company has thousands of staff, how to create contextual views for each one at run time?
+
+## Situation 7: Thousands of data columns have been ingested as string, how to decide a most suitable column type?
+
+## Situation 8: A vendor called C provides an unbound pivot, which exceeds the BigQuery's column number limit (10k).
+
+## Situation 9: A BigQuery loading function ignores hundred of rows of CSV for some special characters within them while Park can recognize it in a partial correct way.
+
+## Situation 10: How to operate data pipelines automatically and manually?
+
+## Situation 11: How to make sure data pipeline runs when the whole batch of files are ready?
