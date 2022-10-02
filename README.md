@@ -19,6 +19,7 @@ Cloud service reduce the difficulty of scalability.
 
 
 # Experience and Thoughts on Data Pipeline Development in Airflow
+(https://medium.com/@work.ying.lee/experience-and-thoughts-on-data-pipeline-development-in-airflow-1898828acc3e)
 
 I have led a team to build 20+ ETL/ELT data pipelines in Airflow. As a practitioner, I am to share my experience and thoughts.
 
